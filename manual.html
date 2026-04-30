@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>説明書 | ニッポンつなぎ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="all.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+    background: url('bg.png') center/cover fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px 16px 40px;
+  }
+
+  .container {
+    background: rgba(255, 252, 242, 0.93);
+    border-radius: 20px;
+    padding: 28px 24px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(90, 56, 16, 0.25);
+    border: 1px solid rgba(200, 160, 48, 0.35);
+    align-self: flex-start;
+  }
+
+  /* ヘッダー */
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(200,160,48,0.3);
+  }
+  .back-btn {
+    padding: 6px 14px;
+    background: #F5EDD0;
+    color: #5A3810;
+    border: 1px solid #C8A030;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .back-btn:hover { background: #E8D898; }
+  .page-title {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #5A3810;
+  }
+
+  /* セクション共通 */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #7A5010;
+    background: rgba(253, 245, 220, 0.9);
+    border-left: 3px solid #C8A030;
+    padding: 5px 10px;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 12px;
+  }
+  .section-title i {
+    margin-right: 6px;
+    color: #C8A030;
+  }
+
+  /* ルール */
+  .rule-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rule-list li {
+    font-size: 0.88rem;
+    color: #3A2810;
+    line-height: 1.7;
+    padding: 8px 12px;
+    background: rgba(250,244,228,0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(200,160,48,0.18);
+  }
+  .rule-list li i {
+    color: #C8A030;
+    width: 18px;
+    margin-right: 4px;
+  }
+
+  /* スコア表 */
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    color: #3A2810;
+  }
+  .score-table th {
+    background: rgba(200,160,48,0.2);
+    color: #6A4800;
+    font-weight: bold;
+    padding: 7px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(200,160,48,0.3);
+  }
+  .score-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(200,160,48,0.12);
+    vertical-align: top;
+  }
+  .score-table tr:last-child td { border-bottom: none; }
+  .score-table tr:nth-child(odd) td { background: rgba(245,237,208,0.5); }
+
+  .highlight {
+    display: inline-block;
+    background: linear-gradient(135deg, #fdecc0, #f5d060);
+    color: #6A4800;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.82rem;
+  }
+
+  /* テキストブロック */
+  .text-block {
+    font-size: 0.85rem;
+    color: #4A3820;
+    line-height: 1.85;
+    background: rgba(250,244,228,0.7);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid rgba(200,160,48,0.18);
+  }
+  .text-block p + p { margin-top: 8px; }
+
+  /* クレジット */
+  .credit-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .credit-list li {
+    font-size: 0.82rem;
+    color: #4A3820;
+    line-height: 1.7;
+    display: flex;
+    gap: 8px;
+  }
+  .credit-label {
+    color: #8A7060;
+    white-space: nowrap;
+    min-width: 100px;
+    font-size: 0.78rem;
+  }
+  .credit-value { color: #3A2810; }
+  .credit-value a {
+    color: #5A7890;
+    text-decoration: none;
+  }
+  .credit-value a:hover { text-decoration: underline; }
+
+  /* フッター */
+  .footer-note {
+    text-align: center;
+    font-size: 0.65rem;
+    color: rgba(138,120,80,0.45);
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 420px) {
+    body { padding: 10px 8px 30px; }
+    .container { padding: 18px 14px; }
+    .page-title { font-size: 1rem; }
+    .rule-list li { font-size: 0.82rem; }
+    .score-table { font-size: 0.78rem; }
+    .credit-label { min-width: 80px; font-size: 0.74rem; }
+    .credit-value { font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ヘッダー -->
+  <div class="page-header">
+    <a class="back-btn" href="index.html">
+      <i class="fa-solid fa-arrow-left"></i> ゲームに戻る
+    </a>
+    <div class="page-title"><i class="fa-solid fa-book-open" style="color:#C8A030;margin-right:6px;"></i>説明書</div>
+  </div>
+
+  <!-- ゲーム概要 -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-torii-gate"></i>ニッポンつなぎとは</div>
+    <div class="text-block">
+      <p>日本全国の市区町村名を使ったしりとりゲームです。コンピューターが最初の地名を提示するので、その最後の文字から始まる市区町村名を答えてください。</p>
+      <p>連続正解でコンボボーナスが加算され、スコアがどんどん伸びていきます。どこまで続けられるか挑戦してみてください！</p>
+    </div>
+  </div>
+
+  <!-- ルール -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-list-check"></i>ルール</div>
+    <ul class="rule-list">
+      <li><i class="fa-solid fa-map-location-dot"></i>コンピューターが出した市区町村名の、<strong>最後のひらがな</strong>から始まる市区町村名を入力してください。</li>
+      <li><i class="fa-solid fa-scissors"></i>「市・区・町・村」はしりとりの対象外です。たとえば「横浜市」なら「よこはま」の最後の文字「<strong>ま</strong>」から始まる地名を答えます。</li>
+      <li><i class="fa-solid fa-circle-half-stroke"></i>濁点・半濁点の有無は問いません。「が」と「か」、「ぱ」と「は」などは同じ文字として扱います。</li>
+      <li><i class="fa-solid fa-ban"></i>すでに答えた地名は使えません。</li>
+      <li><i class="fa-solid fa-lightbulb"></i>3回ミスすると候補ヒントが表示されます。</li>
+      <li><i class="fa-solid fa-flag"></i>続けられなくなったらギブアップボタンでゲームを終了できます。</li>
+    </ul>
+  </div>
+
+  <!-- スコアシステム -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-star"></i>スコアシステム</div>
+    <div class="text-block" style="margin-bottom:12px;">
+      <p>正解するたびに <span class="highlight">1 ＋ コンボ数 × 0.2</span> 点が加算されます。コンボを重ねるほど1問あたりの得点が上がります。</p>
+    </div>
+    <table class="score-table">
+      <thead>
+        <tr><th>コンボ数</th><th>1問あたりの得点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0（初回）</td><td>1.0点</td></tr>
+        <tr><td>1</td><td>1.2点</td></tr>
+        <tr><td>5</td><td>2.0点</td></tr>
+        <tr><td>10</td><td>3.0点</td></tr>
+        <tr><td>25</td><td>6.0点</td></tr>
+        <tr><td>50（最大）</td><td>11.0点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- マイルストーンボーナス -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-gift"></i>マイルストーンボーナス</div>
+    <div class="text-block" style="margin-bottom:12px;">
+      <p>コンボとは別に、特定の問数に到達するとボーナス点が加算されます。</p>
+    </div>
+    <table class="score-table">
+      <thead>
+        <tr><th>達成問数</th><th>ボーナス点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><i class="fa-solid fa-award" style="color:#C8A030"></i> 10問</td><td>＋10点</td></tr>
+        <tr><td><i class="fa-solid fa-award" style="color:#C8A030"></i> 30問</td><td>＋30点</td></tr>
+        <tr><td><i class="fa-solid fa-award" style="color:#C8A030"></i> 50問</td><td>＋50点</td></tr>
+        <tr><td><i class="fa-solid fa-award" style="color:#C8A030"></i> 100問</td><td>＋100点</td></tr>
+        <tr><td><i class="fa-solid fa-award" style="color:#C8A030"></i> 200問以降（100問ごと）</td><td>＋達成問数点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 地名一覧 -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-book-open"></i>入力した地名の記録</div>
+    <div class="text-block">
+      <p>過去のプレイで正解した地名はすべて端末に保存されます。スタート画面の「入力した地名を見る」ボタンから、答えた地名を五十音順で確認できます。</p>
+      <p>全国約1,885件の市区町村のうち、何件制覇できるか挑戦してみてください。</p>
+    </div>
+  </div>
+
+  <!-- BGMについて -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-music"></i>BGMについて</div>
+    <div class="text-block">
+      <p>BGMはブラウザ標準の <strong>Web Audio API</strong> を使ったオリジナル楽曲です。<strong>都節音階（みやこぶしおんかい）</strong>をベースにした和風のオルゴール調メロディーです。</p>
+      <p>音量調節・ON/OFFの設定はスタート画面上部のコントロールから行えます。設定は次回起動時にも引き継がれます。</p>
+    </div>
+  </div>
+
+  <!-- クレジット -->
+  <div class="section">
+    <div class="section-title"><i class="fa-solid fa-circle-info"></i>クレジット</div>
+    <ul class="credit-list">
+      <li>
+        <span class="credit-label">制作</span>
+        <span class="credit-value">ことの葉ゲームズ</span>
+      </li>
+      <li>
+        <span class="credit-label">市区町村データ</span>
+        <span class="credit-value">総務省 全国市区町村一覧（公開データに基づく）</span>
+      </li>
+      <li>
+        <span class="credit-label">BGM</span>
+        <span class="credit-value">Web Audio API によるオリジナル楽曲（都節音階）</span>
+      </li>
+      <li>
+        <span class="credit-label">アイコン</span>
+        <span class="credit-value">
+          <a href="https://fontawesome.com" target="_blank" rel="noopener">Font Awesome Free 6.5.2</a>
+          （<a href="https://fontawesome.com/license/free" target="_blank" rel="noopener">CC BY 4.0</a>）
+        </span>
+      </li>
+      <li>
+        <span class="credit-label">背景画像</span>
+        <span class="credit-value">和風桜装飾フレーム素材</span>
+      </li>
+      <li>
+        <span class="credit-label">フォント</span>
+        <span class="credit-value">Hiragino Sans / Meiryo（システムフォント）</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer-note">v1.0.0 &nbsp;|&nbsp; ことの葉ゲームズ</div>
+</div>
+</body>
+</html>
